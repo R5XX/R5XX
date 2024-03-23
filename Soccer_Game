@@ -1,0 +1,59 @@
+#!/bin/bash
+
+# Soccer game using ASCII art
+
+# Function to display the soccer field
+display_field() {
+    clear
+    echo "=================================="
+    echo "  Goal"
+    echo "=================================="
+    echo "|            |            |"
+    echo "|            |            |"
+    echo "|            |            |"
+    echo "|            |            |"
+    echo "|            |            |"
+    echo "|____________|____________|"
+    echo "|            |            |"
+    echo "|            |            |"
+    echo "|            |            |"
+    echo "|            |            |"
+    echo "|            |            |"
+    echo "|____________|____________|"
+    echo "  Player"
+    echo "=================================="
+}
+
+# Function to move the player
+move_player() {
+    read -n 1 -p "Press 'a' to move left, 'd' to move right, or 'q' to quit: " input
+    case $input in
+        a)
+            if ((player_position > 0)); then
+                ((player_position--))
+            fi
+            ;;
+        d)
+            if ((player_position < 2)); then
+                ((player_position++))
+            fi
+            ;;
+        q)
+            echo "Game Over"
+            exit
+            ;;
+        *)
+            echo "Invalid input. Press 'a', 'd', or 'q'."
+            move_player
+            ;;
+    esac
+}
+
+# Initialize player position
+player_position=1
+
+# Main game loop
+while true; do
+    display_field
+    move_player
+done
